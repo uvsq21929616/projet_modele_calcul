@@ -1,93 +1,51 @@
 class RAM:
-    def __init__(self, programme):
-        self.pos = programme[0]['i0']
-        self.registre = programme[0]
-        self.instructions = programme[1]
+    def __init__(self, program):
+        self.registers = {'i0': len(program), 'i1': 0} # dictionnaire des registres (i0 et i1)
+        self.program = program # instructions du programme
 
-    def order(self, instruction):
-        #print(instruction)
-        if 'ADD' in instruction:
-            self.ADD(instruction)
-        
-        elif 'SUB' in instruction:
-            self.SUB(instruction)
-
-        elif 'MUL' in instruction:
-            self.MUL(instruction)  
-
-        elif 'DIV' in instruction:
-            self.DIV(instruction)
-
-        elif 'JUMP' in instruction  :
-            self.JUMP(instruction)
-
-        elif 'JE' in instruction:
-            self.JE(instruction)
-
-        elif 'JL' in instruction:
-            self.JL(instruction)
-
-        elif 'terminé' in instruction:
-            self.termine(instruction)
-        
-        else:
-            print('error')
+    def execute(self):
+        pc = 0  
+        while pc < len(self.program):
+            instruction = self.program[pc].split()
+            opcode = instruction[0]
+            if opcode == "ADD":
+                self.ADD(instruction)
+            elif opcode == "SUB":
+                self.SUB(instruction)
+            elif opcode == "MUL":
+                self.MUL(instruction)
+            elif opcode == "DIV":
+                self.DIV(instruction)
+            elif opcode == "JUMP":
+                pc = int(instruction[1]) - 1 
+            elif opcode == "JE":
+                if self.registers[instruction[1]] == self.registers[instruction[2]]:
+                    pc = int(instruction[3]) - 1
+            elif opcode == "TERMINE":
+                return
+            pc += 1
 
     def ADD(self, instruction):
-        print(instruction)
-        txt = instruction
-        print(txt)
-        self.pos += 1
-        self.order(self.instructions[self.pos])
+        self.registers[instruction[1]] += self.registers[instruction[2]]
 
     def SUB(self, instruction):
-        print(instruction)
-        self.pos += 1
-        self.order(self.instructions[self.pos])
+        self.registers[instruction[1]] -= self.registers[instruction[2]]
 
     def MUL(self, instruction):
-        print(instruction)
-        self.pos += 1
-        self.order(self.instructions[self.pos])
+        self.registers[instruction[1]] *= self.registers[instruction[2]]
 
     def DIV(self, instruction):
-        print(instruction)
-        self.pos += 1
-        self.order(self.instructions[self.pos])
-
-    def JUMP(self, instruction):
-        print(instruction)
-        self.pos += 1
-        self.order(self.instructions[self.pos])
-
-    def JE(self, instruction):
-        print(instruction)
-        self.pos += 1
-        self.order(self.instructions[self.pos])
-
-    def termine(self, instruction):
-        print(instruction)
-        self.pos += 1
-        return self.registre
-    
+        self.registers[instruction[1]] //= self.registers[instruction[2]]
 
 
-def read_program(fichier, mot):
-    programme = [
-        {'i0': 0, 'i1': mot},  # Register initialization
-        []
-    ]
+def read_program(filename, input_word):
+    with open(filename, 'r') as file:
+        instructions = [line.strip() for line in file.readlines()]
+    instructions.insert(0, f'i1 {input_word}')  
+    return instructions
 
-    with open(fichier, 'r') as file: 
-        for line in file:
-            line = line.strip()  # Remove redundant line and the last character ('\n')
-            programme[1].append(line)  # Append each instruction to the list inside programme
-    return programme
-
-programme = read_program("fichier.txt", 1)
-print(programme)
-ram = RAM(programme)
-print(ram.instructions)
-#print(ram.registre)
-#print(ram.pos)
-ram.order(ram.instructions[0])
+program_data = read_program("fichier.txt", 1)
+print(program_data)
+ram = RAM(program_data)
+ram.execute()
+print(ram.registers)
