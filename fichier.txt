@@ -1,6 +1,6 @@
-ADD(0,0,r2) 
-ADD(r2,1,r2)
-DIV(r1,2,r1)
-JE(r1,0,2)
-terminé
+ADD(0,0,i2) 
+ADD(i2,1,i2)
+DIV(i1,2,i1)
+JE(i2,12,2)
 JUMP(-3)
+terminé
