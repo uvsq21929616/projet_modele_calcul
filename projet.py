@@ -53,14 +53,22 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
-                result = int(registres[0]) + self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                self.order(self.instructions[self.pos])
+                if '@' not in registres[1]:
+                    result = int(registres[0]) + self.registre[registres[1]]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[1].replace("@", "")
+                    result = int(registres[0]) + self.registre[registres[1]]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
         else:
             if str.isdigit(registres[1]):
                 result = int(self.registre[registres[0]])+int(registres[1])
@@ -68,14 +76,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(self.registre[registres[0]]) + self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
         
         
 
@@ -94,14 +102,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(registres[0]) - self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
         else:
             if str.isdigit(registres[1]):
                 result = int(self.registre[registres[0]])-int(registres[1])
@@ -109,14 +117,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(self.registre[registres[0]]) - self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
 
     def MUL(self, instruction):
         print(instruction)
@@ -133,14 +141,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(registres[0]) * self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
         else:
             if str.isdigit(registres[1]):
                 result = int(self.registre[registres[0]])*int(registres[1])
@@ -148,14 +156,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(self.registre[registres[0]]) * self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
 
     def DIV(self, instruction):
         print(instruction)
@@ -172,14 +180,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(registres[0]) // self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
         else:
             if str.isdigit(registres[1]):
                 result = int(self.registre[registres[0]])//int(registres[1])
@@ -187,14 +195,14 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
             else:
                 result = int(self.registre[registres[0]]) // self.registre[registres[1]]
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
-                self.order(self.instructions[self.pos])
+                #self.order(self.instructions[self.pos])
 
     def JUMP(self, instruction):
         print(instruction)
@@ -205,7 +213,7 @@ class RAM:
         registres = txt.split(",")
         print(registres)
         self.pos += int(registres[0])
-        self.order(self.instructions[self.pos])
+        #self.order(self.instructions[self.pos])
 
     def JE(self, instruction):
         print(instruction)
@@ -216,12 +224,12 @@ class RAM:
         registres = txt.split(",")
         print(registres)
         if self.registre[registres[0]] == int(registres[1]):
-            print(int(registres[2]))
+            #print(int(registres[2]))
             self.pos += int(registres[2])
-            print(self.pos)
+            #print(self.pos)
         else:
             self.pos +=1
-        self.order(self.instructions[self.pos])
+        #self.order(self.instructions[self.pos])
 
     def JL(self, instruction):
         print(instruction)
@@ -237,7 +245,7 @@ class RAM:
             print(self.pos)
         else:
             self.pos +=1
-        self.order(self.instructions[self.pos])
+        #self.order(self.instructions[self.pos])
 
 
     def termine(self, instruction):
@@ -248,12 +256,18 @@ class RAM:
 
 
 
-def read_program(fichier, mot):
+def read_program(fichier, mots):
+    #prend en entrée un fichier contenant le programme de la machine ram
+    #et une liste contenant le ou les mots d'entrées contenus dans une liste
+
+    #initialisation du programme
     programme = [
-        {'i0': 0, 'i1': mot},  # Register initialization
+        {'i0': 0},  # Register initialization
         []
     ]
-
+    for i in range(len(mots)):
+        programme[0]['i'+str(i+1)] = mots[i]
+    print(programme[0])
     with open(fichier, 'r') as file: 
         for line in file:
             line = line.strip()  # Remove redundant line and the last character ('\n')
@@ -271,15 +285,24 @@ def etape_suivante(ram, config):
     return [ram.pos, ram.registre]
 
 def marche_ram(ram, mot):
-    ram.registre['i0'] = mot
-    ram.order(ram.instructions[0])
+    ram.registre['i1'] = mot
+    print("registre initial:", ram.registre['i1'])
+    while True:
+        current_instruction = ram.instructions[ram.pos]
+        print("instruction:", current_instruction)
+        if 'terminé' in current_instruction:
+            print("Programme terminé.")
+            break
+        ram.order(current_instruction)
+        print("registre mis à jour:", ram.registre)
+        print("position mise à jour:", ram.pos)
 
 
-programme = read_program("fichier.txt", 1)
-print(programme)
+programme = read_program("fichier.txt", [1, 2, 3])
+#print(programme)
 ram = RAM(programme)
-print(ram.instructions)
+#print(ram.instructions)
 #print(ram.registre)
 #print(ram.pos)
-ram.order(ram.instructions[0])
-print(ram.pos)
+marche_ram(ram, 0)
+#print(ram.pos)
