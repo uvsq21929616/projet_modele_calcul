@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 
-import re
-
 class RAM:
     def __init__(self, programme):
         self.pos = programme[0]['i0']
@@ -64,7 +62,9 @@ class RAM:
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[1].replace("@", "")
-                    result = int(registres[0]) + self.registre[registres[1]]
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(registres[0]) + self.registre[clé]
                     print(result)
                     self.registre[registres[2]] = result
                     self.pos +=1
@@ -286,7 +286,7 @@ def etape_suivante(ram, config):
 
 def marche_ram(ram, mot):
     ram.registre['i1'] = mot
-    print("registre initial:", ram.registre['i1'])
+    print("registre initial:", ram.registre)
     while True:
         current_instruction = ram.instructions[ram.pos]
         print("instruction:", current_instruction)
