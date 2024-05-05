@@ -71,20 +71,68 @@ class RAM:
                     print(self.registre)
         else:
             if str.isdigit(registres[1]):
-                result = int(self.registre[registres[0]])+int(registres[1])
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if '@' not in registres[0]:
+                    result = int(self.registre[registres[0]])+int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[0]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(self.registre[clé])+int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+
             else:
-                result = int(self.registre[registres[0]]) + self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
-        
+                if '@' not in registres[0]:
+                    if '@' not in registres[0]:
+                        result = int(self.registre[registres[0]])+int(registres[1])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[clé])+int(registres[1])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        result = int(self.registre[registres[0]])+int(registres[1])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[0]]
+                    clé = list(self.registre.keys())[index]
+                    if '@' not in registres[0]:
+                        result = int(self.registre[registres[0]])+int(self.registre[clé])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[0].replace("@", "")
+                        index2 = self.registre[registres[0]]
+                        clé2 = list(self.registre.keys())[index2]
+                        result = int(self.registre[clé2])+int(self.registre[clé])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        #self.order(self.instructions[self.pos])
         
 
     def SUB(self, instruction):
@@ -104,27 +152,84 @@ class RAM:
                 print(self.registre)
                 #self.order(self.instructions[self.pos])
             else:
-                result = int(registres[0]) - self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if '@' not in registres[1]:
+                    result = int(registres[0]) - self.registre[registres[1]]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[1].replace("@", "")
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(registres[0]) - self.registre[clé]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+
         else:
             if str.isdigit(registres[1]):
-                result = int(self.registre[registres[0]])-int(registres[1])
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if "@" not in registres[0]:
+                    result = int(self.registre[registres[0]])-int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(self.registre[clé]) -int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
             else:
-                result = int(self.registre[registres[0]]) - self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if "@" not in registres[0]:
+                    if "@" not in registres[1]:
+                        result = int(self.registre[registres[0]]) - int(self.registre[registres[1]])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[1].replace("@", "")
+                        index = self.registre[registres[1]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[registres[0]]) - int(self.registre[clé])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                else:
+                    if "@" not in registres[1]:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[clé]) - int(self.registre[registres[1]])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        registres[1].replace("@", "")
+                        index2 = self.registre[registres[1]]
+                        clé2 = list(self.registre.keys())[index]
+                        result = int(self.registre[clé]) - int(self.registre[clé2])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
 
     def MUL(self, instruction):
         print(instruction)
@@ -143,27 +248,84 @@ class RAM:
                 print(self.registre)
                 #self.order(self.instructions[self.pos])
             else:
-                result = int(registres[0]) * self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if '@' not in registres[1]:
+                    result = int(registres[0]) * self.registre[registres[1]]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[1].replace("@", "")
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(registres[0]) * self.registre[clé]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+
         else:
             if str.isdigit(registres[1]):
-                result = int(self.registre[registres[0]])*int(registres[1])
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if "@" not in registres[0]:
+                    result = int(self.registre[registres[0]])*int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(self.registre[clé]) *int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
             else:
-                result = int(self.registre[registres[0]]) * self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if "@" not in registres[0]:
+                    if "@" not in registres[1]:
+                        result = int(self.registre[registres[0]]) * int(self.registre[registres[1]])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[1].replace("@", "")
+                        index = self.registre[registres[1]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[registres[0]]) * int(self.registre[clé])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                else:
+                    if "@" not in registres[1]:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[clé]) * int(self.registre[registres[1]])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        registres[1].replace("@", "")
+                        index2 = self.registre[registres[1]]
+                        clé2 = list(self.registre.keys())[index]
+                        result = int(self.registre[clé]) * int(self.registre[clé2])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
 
     def DIV(self, instruction):
         print(instruction)
@@ -175,34 +337,91 @@ class RAM:
         print(registres)
         if str.isdigit(registres[0]):
             if str.isdigit(registres[1]):
-                result = int(registres[0])//int(registres[1])
+                result = int(registres[0]) // int(registres[1])
                 print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
                 #self.order(self.instructions[self.pos])
             else:
-                result = int(registres[0]) // self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if '@' not in registres[1]:
+                    result = int(registres[0]) // self.registre[registres[1]]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[1].replace("@", "")
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(registres[0]) // self.registre[clé]
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+
         else:
             if str.isdigit(registres[1]):
-                result = int(self.registre[registres[0]])//int(registres[1])
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if "@" not in registres[0]:
+                    result = int(self.registre[registres[0]])// int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[1]]
+                    clé = list(self.registre.keys())[index]
+                    result = int(self.registre[clé]) // int(registres[1])
+                    print(result)
+                    self.registre[registres[2]] = result
+                    self.pos +=1
+                    print(self.registre)
             else:
-                result = int(self.registre[registres[0]]) // self.registre[registres[1]]
-                print(result)
-                self.registre[registres[2]] = result
-                self.pos +=1
-                print(self.registre)
-                #self.order(self.instructions[self.pos])
+                if "@" not in registres[0]:
+                    if "@" not in registres[1]:
+                        result = int(self.registre[registres[0]]) // int(self.registre[registres[1]])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[1].replace("@", "")
+                        index = self.registre[registres[1]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[registres[0]]) // int(self.registre[clé])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                else:
+                    if "@" not in registres[1]:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        result = int(self.registre[clé]) // int(self.registre[registres[1]])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
+                    else:
+                        registres[0].replace("@", "")
+                        index = self.registre[registres[0]]
+                        clé = list(self.registre.keys())[index]
+                        registres[1].replace("@", "")
+                        index2 = self.registre[registres[1]]
+                        clé2 = list(self.registre.keys())[index]
+                        result = int(self.registre[clé]) // int(self.registre[clé2])
+                        print(result)
+                        self.registre[registres[2]] = result
+                        self.pos +=1
+                        print(self.registre)
+                        #self.order(self.instructions[self.pos])
 
     def JUMP(self, instruction):
         print(instruction)
@@ -223,13 +442,26 @@ class RAM:
         txt = txt[1:-1]
         registres = txt.split(",")
         print(registres)
-        if self.registre[registres[0]] == int(registres[1]):
-            #print(int(registres[2]))
-            self.pos += int(registres[2])
-            #print(self.pos)
+        if "@" not in registres[0]:
+            if self.registre[registres[0]] == int(registres[1]):
+                #print(int(registres[2]))
+                self.pos += int(registres[2])
+                #print(self.pos)
+            else:
+                self.pos +=1
+            #self.order(self.instructions[self.pos])
         else:
-            self.pos +=1
-        #self.order(self.instructions[self.pos])
+            registres[0].replace("@", "")
+            index = self.registre[registres[0]]
+            clé = list(self.registre.keys())[index]
+            if self.registre[clé] == int(registres[1]):
+                #print(int(registres[2]))
+                self.pos += int(registres[2])
+                #print(self.pos)
+            else:
+                self.pos +=1
+            #self.order(self.instructions[self.pos])
+
 
     def JL(self, instruction):
         print(instruction)
@@ -239,12 +471,24 @@ class RAM:
         txt = txt[1:-1]
         registres = txt.split(",")
         print(registres)
-        if self.registre[registres[0]] >= int(registres[1]):
-            print(int(registres[2]))
-            self.pos += int(registres[2])
-            print(self.pos)
+        if "@" not in registres[0]:
+            if self.registre[registres[0]] >= int(registres[1]):
+                print(int(registres[2]))
+                self.pos += int(registres[2])
+                print(self.pos)
+            else:
+                self.pos +=1
         else:
-            self.pos +=1
+            registres[0].replace("@", "")
+            index = self.registre[registres[0]]
+            clé = list(self.registre.keys())[index]
+            if self.registre[clé] >= int(registres[1]):
+                print(int(registres[2]))
+                self.pos += int(registres[2])
+                print(self.pos)
+            else:
+                self.pos +=1
+
         #self.order(self.instructions[self.pos])
 
 
