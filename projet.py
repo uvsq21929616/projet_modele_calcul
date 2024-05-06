@@ -588,8 +588,8 @@ def marche_ram(ram, mot):
         print("position mise à jour:", ram.pos)
 
 
-programme = read_program("machine_a_puissance_b.txt", [2, 5])
+programme = read_program("machine_a_puissance_b.txt", [3, 5])
 
 ram = RAM(programme)
 
-marche_ram(ram, 2)
+marche_ram(ram, 3)

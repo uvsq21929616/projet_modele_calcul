@@ -1,0 +1,7 @@
+ADD(i1, 0,i3)
+ADD(1,0,i4)
+MUL(i1,i3,i3)
+ADD(i4,1,i4)
+JE(i4,i2, 2)
+JUMP(-3)
+terminé
