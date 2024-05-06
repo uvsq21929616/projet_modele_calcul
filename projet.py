@@ -587,9 +587,87 @@ def marche_ram(ram, mot):
         print("registre mis à jour:", ram.registre)
         print("position mise à jour:", ram.pos)
 
+def graphe_ram(fichier):
+    programme = []
+    with open(fichier, 'r') as file: 
+        for line in file:
+            line = line.strip()  # enlève le caractère '\n'
+            programme.append(line)  # ajoute chaque instruction au programme de la ram
+    destinations = []
+    for i in range(len(programme)):
+        if 'JE' not in programme[i] and 'JUMP' not in programme[i] and 'JL' not in programme[i] and "terminé" not in programme[i]:
+            string = str(programme[i]) + " vers " + str(programme[i+1])
+            destinations.append(string)
+        elif 'terminé' in programme[i]:
+            for destination in destinations:
+                print(destination)
+            return destinations
+        elif 'JUMP' in programme[i]:
+            txt = programme[i]
+            txt = txt.replace("JUMP", "")
+            txt = txt.replace("(", "")
+            txt = txt.replace(")", "")
+            print(txt)
+            string = str(programme[i]) + " vers " + programme[i+int(txt)]
+            destinations.append(string)
+        elif 'JE' in programme[i]:
+            string = str(programme[i]) + " vers " + str(programme[i+1])
+            destinations.append(string)
+            txt = programme[i]
+            txt = txt.replace("JE", "")
+            txt = txt.replace("(", "")
+            txt = txt.replace(")", "")
+            txt = txt.split(",")
+            print(txt)
+            string2 = str(programme[i]) + " vers " + programme[i+int(txt[2])]
+            destinations.append(string2)
+        elif 'JL' in programme[i]:
+            string = str(programme[i]) + " vers " + str(programme[i+1])
+            destinations.append(string)
+            txt = programme[i]
+            txt = txt.replace("JL", "")
+            txt = txt.replace("(", "")
+            txt = txt.replace(")", "")
+            txt = txt.split(",")
+            print(txt)
+            string2 = str(programme[i]) + " vers " + programme[i+int(txt[2])]
+            destinations.append(string2)
+    for destination in destinations:
+        print(destination)
+    return destinations
 
-programme = read_program("machine_a_puissance_b.txt", [3, 5])
+def code_mort_ram(fichier):
+    destinations = graphe_ram(fichier)
+    programme = []
+    with open(fichier, "r") as f_in, open("code_nettoyé.txt", "w") as f_out:
+        for line in f_in:
+            line = line.strip()  # enlève le caractère '\n'
+            programme.append(line)  # ajoute chaque instruction au programme de la ram
+        for instruction in programme[1:]:
+            i = 0
+            for destination in destinations:
+                if "vers " + instruction in destination:
+                    i = 1
+            if i == 0:
+                print(instruction + " code mort")
+            if i == 1:
+                f_out.write(instruction)
+                f_out.write("\n")
+
+def combiner_instruction(fichier):
+    destinations = graphe_ram(fichier)
+    programme = []
+    with open(fichier, "r") as f_in, open("code_combiné.txt", "w") as f_out:
+        for line in f_in:
+            line = line.strip()  # enlève le caractère '\n'
+            programme.append(line)  # ajoute chaque instruction au programme de la ram
+        
+            
+
+
+
+programme = read_program("machine_a_puissance_b.txt", [3, 15])
 
 ram = RAM(programme)
 
-marche_ram(ram, 3)
+code_mort_ram("machine_a_puissance_b.txt")

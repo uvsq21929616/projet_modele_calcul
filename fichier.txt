@@ -4,3 +4,4 @@ DIV(i1,2,i1)
 JE(i2,12,2)
 JUMP(-3)
 terminé
+ADD(0,0,i4)
