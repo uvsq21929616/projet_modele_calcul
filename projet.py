@@ -593,60 +593,57 @@ def graphe_ram(fichier):
         for line in file:
             line = line.strip()  # enlève le caractère '\n'
             programme.append(line)  # ajoute chaque instruction au programme de la ram
-    destinations = []
+    successeurs = {}
+    for instruction in programme:
+        successeurs[instruction] = []
     for i in range(len(programme)):
         if 'JE' not in programme[i] and 'JUMP' not in programme[i] and 'JL' not in programme[i] and "terminé" not in programme[i]:
-            string = str(programme[i]) + " vers " + str(programme[i+1])
-            destinations.append(string)
+            successeurs[programme[i]].append(programme[i+1])
         elif 'terminé' in programme[i]:
-            for destination in destinations:
-                print(destination)
-            return destinations
+            print(successeurs)
+            return successeurs
         elif 'JUMP' in programme[i]:
             txt = programme[i]
             txt = txt.replace("JUMP", "")
             txt = txt.replace("(", "")
             txt = txt.replace(")", "")
             print(txt)
-            string = str(programme[i]) + " vers " + programme[i+int(txt)]
-            destinations.append(string)
+            successeurs[programme[i]].append(programme[i+int(txt)])
         elif 'JE' in programme[i]:
-            string = str(programme[i]) + " vers " + str(programme[i+1])
-            destinations.append(string)
             txt = programme[i]
             txt = txt.replace("JE", "")
             txt = txt.replace("(", "")
             txt = txt.replace(")", "")
             txt = txt.split(",")
-            print(txt)
-            string2 = str(programme[i]) + " vers " + programme[i+int(txt[2])]
-            destinations.append(string2)
+            successeurs[programme[i]].append(programme[i+1])
+            successeurs[programme[i]].append(programme[i+int(txt[2])])
+
         elif 'JL' in programme[i]:
-            string = str(programme[i]) + " vers " + str(programme[i+1])
-            destinations.append(string)
             txt = programme[i]
             txt = txt.replace("JL", "")
             txt = txt.replace("(", "")
             txt = txt.replace(")", "")
             txt = txt.split(",")
-            print(txt)
-            string2 = str(programme[i]) + " vers " + programme[i+int(txt[2])]
-            destinations.append(string2)
-    for destination in destinations:
-        print(destination)
-    return destinations
+            successeurs[programme[i]].append(programme[i+1])
+            successeurs[programme[i]].append(programme[i+int(txt[2])])    
+    return successeurs
 
 def code_mort_ram(fichier):
-    destinations = graphe_ram(fichier)
+    successeurs = graphe_ram(fichier)
     programme = []
     with open(fichier, "r") as f_in, open("code_nettoyé.txt", "w") as f_out:
         for line in f_in:
             line = line.strip()  # enlève le caractère '\n'
             programme.append(line)  # ajoute chaque instruction au programme de la ram
+        f_out.write(programme[0])
+        print(programme[0])
+        f_out.write("\n")
+        print(successeurs.values())
         for instruction in programme[1:]:
             i = 0
-            for destination in destinations:
-                if "vers " + instruction in destination:
+            for value in successeurs.values():
+                if instruction in value:
+                    print(instruction)
                     i = 1
             if i == 0:
                 print(instruction + " code mort")
@@ -655,19 +652,160 @@ def code_mort_ram(fichier):
                 f_out.write("\n")
 
 def combiner_instruction(fichier):
-    destinations = graphe_ram(fichier)
+    successeurs = graphe_ram(fichier)
     programme = []
     with open(fichier, "r") as f_in, open("code_combiné.txt", "w") as f_out:
         for line in f_in:
             line = line.strip()  # enlève le caractère '\n'
             programme.append(line)  # ajoute chaque instruction au programme de la ram
-        
-            
+        print(programme)
+        for i, instruction in enumerate(programme):
+            print(successeurs[programme[i]])
+            if len(successeurs[programme[i]]) ==  1:
+                print(programme[i], successeurs[programme[i]][0])
+                if "ADD" in programme[i] and "ADD" in successeurs[programme[i]][0]:
+                    txt1 = programme[i]
+                    txt1 = txt1.replace("ADD(","")
+                    txt1 = txt1.replace(")","")
+                    txt1 = txt1.split(",")
+                    print(txt1)
+                    txt2 = successeurs[programme[i]][0]
+                    txt2 = txt2.replace("ADD(","")
+                    txt2 = txt2.replace(")","")
+                    txt2 = txt2.split(",")
+                    print(txt2)
+                    if txt1[2] == txt2[2]:
+                        print("okk")
+                        if txt2[0].isdigit():
+                            programme.remove(programme[i])
+                            print("hey")
 
+                        elif txt2[0] != txt2[2]:
+                            print("uhoh")
+                            print("hey")
 
+                        else:
+                            if txt1[0].isdigit():
+                                result = int(txt1[0]) + int(txt1[1]) +int(txt2[1])
+                                print(result)
+                                txt = "ADD(0,"+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+                                print("hey")
+                            else:
+                                result = int(txt1[1]) + int(txt2[1])
+                                print(result)
+                                txt = "ADD("+txt2[0]+","+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = [txt]
+                                del(programme[i+1])
+                                print("hey")
+
+                if "SUB" in programme[i] and "SUB" in successeurs[programme[i]][0]:
+                    txt1 = programme[i]
+                    txt1 = txt1.replace("SUB(","")
+                    txt1 = txt1.replace(")","")
+                    txt1 = txt1.split(",")
+                    print(txt1)
+                    txt2 = successeurs[programme[i]][0]
+                    txt2 = txt2.replace("SUB(","")
+                    txt2 = txt2.replace(")","")
+                    txt2 = txt2.split(",")
+                    print(txt2)
+                    if txt1[2] == txt2[2]:
+                        print("okk")
+                        if txt2[0].isdigit():
+                            programme.remove(programme[i])
+                        elif txt2[0] != txt2[2]:
+                            print("uhoh")
+                        else:
+                            if txt1[0].isdigit():
+                                result = int(txt1[0]) - int(txt1[1]) - int(txt2[1])
+                                print(result)
+                                txt = "SUB(0,"+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+                            else:
+                                result = int(txt1[1]) + int(txt2[1])
+                                print(result)
+                                txt = "SUB("+txt2[0]+","+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+                if "MUL" in programme[i] and "MUL" in successeurs[programme[i]][0]:
+                    txt1 = programme[i]
+                    txt1 = txt1.replace("MUL(","")
+                    txt1 = txt1.replace(")","")
+                    txt1 = txt1.split(",")
+                    print(txt1)
+                    txt2 = successeurs[programme[i]][0]
+                    txt2 = txt2.replace("MUL(","")
+                    txt2 = txt2.replace(")","")
+                    txt2 = txt2.split(",")
+                    print(txt2)
+                    if txt1[2] == txt2[2]:
+                        print("okk")
+                        if txt2[0].isdigit():
+                            programme.remove(programme[i])
+                        elif txt2[0] != txt2[2]:
+                            print("uhoh")
+                        else:
+                            if txt1[0].isdigit():
+                                result = int(txt1[0]) * int(txt1[1]) * int(txt2[1])
+                                print(result)
+                                txt = "MUL(0,"+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+                            else:
+                                result = int(txt1[1]) + int(txt2[1])
+                                print(result)
+                                txt = "MUL("+txt2[0]+","+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+                if "DIV" in programme[i] and "DIV" in successeurs[programme[i]][0]:
+                    txt1 = programme[i]
+                    txt1 = txt1.replace("DIV(","")
+                    txt1 = txt1.replace(")","")
+                    txt1 = txt1.split(",")
+                    print(txt1)
+                    txt2 = successeurs[programme[i]][0]
+                    txt2 = txt2.replace("DIV(","")
+                    txt2 = txt2.replace(")","")
+                    txt2 = txt2.split(",")
+                    print(txt2)
+                    if txt1[2] == txt2[2]:
+                        print("okk")
+                        if txt2[0].isdigit():
+                            programme.remove(programme[i])
+                        elif txt2[0] != txt2[2]:
+                            print("uhoh")
+                        else:
+                            if txt1[0].isdigit():
+                                result = int(txt1[0]) * int(txt1[1]) * int(txt2[1])
+                                print(result)
+                                txt = "DIV(0,"+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+                            else:
+                                result = int(txt1[1]) * int(txt2[1])
+                                print(result)
+                                txt = "DIV("+txt2[0]+","+str(result)+","+txt2[2]+")"
+                                print(txt)
+                                programme[i] = txt
+                                del(programme[i+1])
+        for i in range(len(programme)-1):
+                f_out.write(programme[i])
+                f_out.write("\n")
+        f_out.write(programme[-1])
+    print(programme)
 
 programme = read_program("machine_a_puissance_b.txt", [3, 15])
 
 ram = RAM(programme)
-
-code_mort_ram("machine_a_puissance_b.txt")
+code_mort_ram("fichier.txt")
+combiner_instruction("machine_a_puissance_b.txt")
