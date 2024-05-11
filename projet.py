@@ -685,10 +685,10 @@ def marche_ram(ram, mot):
 
 
 
-"""programme = read_program("machine_a_puissance_b.txt", [3, 15])
+programme = read_program("machine_a_puissance_b.txt", [3, 15])
 ram = RAM(programme)
 marche_ram(ram, 3)
-"""
+
 ### Automates à piles
 def lire_automate(liste_transition, mot, fichier):
     """
@@ -738,14 +738,14 @@ def marche_automate(ram):
 
 #print(lire_automate([[0, 1, 0, 2, 1, 1, 1], [0, 1, 1, 2, 1, 1, 0]], 0, "automate_a_pile.txt"))
 
-programme_automate = lire_automate([[0, 1, 0, 1, 0], [0, 1, 1, 1, 0], [0, 0, 1, 2, 1], [1, 0, 1, 2, 1], [1, '', 0, 0, 'final']], 111000, "automate_a_pile.txt")
+"""programme_automate = lire_automate([[0, 1, 0, 1, 0], [0, 1, 1, 1, 0], [0, 0, 1, 2, 1], [1, 0, 1, 2, 1], [1, '', 0, 0, 'final']], 111000, "automate_a_pile.txt")
 ram_automate = RAM_AUTOMATE(programme_automate)
 print(ram_automate.instructions)
 print(ram_automate.registre)
 print(ram_automate)
 marche_automate(ram_automate)
 etape_suivante(ram_automate, [2, {'i0': 0, 'i1': 0, 'i2': 0, 'i3': 0, 'i4': 0, 'i5': 0, 'i6': 1, 'i7': 0, 'i8': 2, 'i9': 1, 'i10': 1, 'i11': 1, 'i12': 0, 'i13': 1, 'i14': 1, 'i15': 2, 'i16': 1, 'i17': 1, 'i18': 0}])
-print(ram_automate.pos)
+print(ram_automate.pos)"""
 
 #### Optimisation
 def graphe_ram(fichier):
