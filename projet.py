@@ -541,7 +541,104 @@ class RAM:
         return self.registre
 
 
+class RAM_AUTOMATE(RAM):
+    def __init__(self, programme):
+        super().__init__(programme)
 
+    
+    def order(self, instruction):
+        if "FIND" in instruction:
+            self.FIND(instruction)
+        elif "ADD" in instruction:
+            self.ADD(instruction)
+        elif "JE" in instruction:
+            self.JE(instruction)
+        elif "JUMP" in instruction:
+            self.JUMP(instruction)
+        elif "motreconnu" in instruction:
+            self.termine(instruction)
+        elif "nonreconnu" in instruction:
+            self.nonreconnu(instruction)
+
+    def FIND(self, instruction):
+        print(instruction)
+        #print(self.pos, self.registre)
+        self.pos += 1
+        txt = instruction
+        txt = txt.replace("ADD", "") 
+        txt = txt[1:-1]
+        registres = txt.split(",")
+        lettre_mot = self.registre['i1'][0]
+        lettre_pile = self.registre['i2'][-1]
+        etat = self.registre['i3']
+        index1 = 7
+        index2 = 8
+        index3 = 9
+        i = 0
+        while True:
+            if (index2) > len(self.registre.keys()):
+                    print("ereur ! transition pas dans l'automate!")
+                    break
+            else:
+                if self.registre['i'+str(index1)] == etat:
+                    if  self.registre['i'+str(index2)] == lettre_mot and self.registre['i'+str(index3)] == lettre_pile:
+                        self.registre['i4'] = self.registre['i'+str(index3+1)]
+                        self.registre['i5'] = self.registre['i'+str(index3+2)]
+                        print(lettre_mot, lettre_pile, self.registre['i'+str(index1)], self.registre['i'+str(index2)]), 
+                        break
+                    else: 
+                        index1 += 5
+                        index2 += 5
+                        index3 += 5
+                else: 
+                    index1 += 5
+                    index2 += 5
+                    index3 += 5
+            
+
+    def ADD(self, instruction):
+        print(instruction)
+        self.pos += 1
+        #print(self.pos, self.registre)
+        txt = instruction
+        txt = txt.replace("ADD", "") 
+        txt = txt[1:-1]
+        registres = txt.split(",")
+        print(registres)
+        for lettre in self.registre[registres[1]]:
+            if lettre == '1':
+                self.registre['i2'] += '1'
+            elif lettre == '2':
+                self.registre['i2'] = self.registre['i2'][:-1]
+        self.registre['i3'] == self.registre['i4']
+
+    def JE(self, instruction):
+        print(instruction)
+        self.pos += 1
+        #print(self.pos, self.registre)
+        txt = instruction
+        txt = txt.replace("JE", "") 
+        txt = txt[1:-1]
+        registres = txt.split(",")
+        print(registres)
+        if self.registre[registres[0]] == registres[1]:
+            self.pos += int(registres[2])
+        else:
+            self.pos += 1
+
+    def nonreconnu(self, instruction):
+        self.pos += 1
+        print("mot non reconnu")
+        return self.registre
+    
+    def termine(self, instruction):
+        self.pos += 1
+        print("motreconnu")
+        return self.registre
+    
+
+
+#### Simulaltion
 def read_program(fichier, mots):
     #prend en entrée un fichier contenant le programme de la machine ram
     #et une liste contenant le ou les mots d'entrées contenus dans une liste
@@ -559,7 +656,6 @@ def read_program(fichier, mots):
             line = line.strip()  # enlève le caractère '\n'
             programme[1].append(line)  # ajoute chaque instruction au programme de la ram
     return programme
-
 
 def etape_suivante(ram, config):
     # Prend en argument une machine RAM et une configuration [pos, registre]
@@ -580,13 +676,78 @@ def marche_ram(ram, mot):
     while True:
         current_instruction = ram.instructions[ram.pos]
         print("instruction:", current_instruction)
-        if 'terminé' in current_instruction:
+        if 'terminé' in current_instruction or "motreconnu" in current_instruction:
             print("Programme terminé.")
             break
         ram.order(current_instruction)
         print("registre mis à jour:", ram.registre)
         print("position mise à jour:", ram.pos)
 
+
+
+"""programme = read_program("machine_a_puissance_b.txt", [3, 15])
+ram = RAM(programme)
+marche_ram(ram, 3)
+"""
+### Automates à piles
+def lire_automate(liste_transition, mot, fichier):
+    """
+    une transition de la liste ressemble à ceci:
+    - état initial
+    - lettre lue
+    - lettre du dessus de la pile
+    - lettre à écrire sur la pile
+    - etat final
+    """
+    registre = {
+        'i0': 0, # correspond à la position dans la machine ram
+        'i1': str(mot), # correspond au mot qu'on lit
+        'i2': '0', # correspond à la pile
+        'i3': '0', # correspond à l'état
+        'i4': '0', # correspond à la lettre à ajouter sur la pile : 1, on empile 1, 2, on dépile 1
+        'i5': '0', #correspond à l'état suivant
+        'i6': len(liste_transition) # correspond au nombre de transitions
+    }
+    #print(len(liste_transition))
+    index = 7
+    for transition in liste_transition: # on ajoute chaque élément des transitions au registre
+        #print(transition)
+        for elem in transition:
+            i = 'i'+str(index)
+            registre[i] =str(elem)
+            index += 1
+    programme = [registre, []]
+    with open(fichier, "r") as file:
+        for line in file:
+            line = line.strip()
+            programme[1].append(line)
+    return programme
+
+
+def marche_automate(ram):
+    print("registre initial:", ram.registre)
+    while True:
+        current_instruction = ram.instructions[ram.pos]
+        print("instruction:", current_instruction)
+        if "motreconnu" in current_instruction:
+            print("Programme terminé.")
+            break
+        ram.order(current_instruction)
+        print("registre mis à jour:", ram.registre)
+        print("position mise à jour:", ram.pos)
+
+#print(lire_automate([[0, 1, 0, 2, 1, 1, 1], [0, 1, 1, 2, 1, 1, 0]], 0, "automate_a_pile.txt"))
+
+programme_automate = lire_automate([[0, 1, 0, 1, 0], [0, 1, 1, 1, 0], [0, 0, 1, 2, 1], [1, 0, 1, 2, 1], [1, '', 0, 0, 'final']], 111000, "automate_a_pile.txt")
+ram_automate = RAM_AUTOMATE(programme_automate)
+print(ram_automate.instructions)
+print(ram_automate.registre)
+print(ram_automate)
+marche_automate(ram_automate)
+etape_suivante(ram_automate, [2, {'i0': 0, 'i1': 0, 'i2': 0, 'i3': 0, 'i4': 0, 'i5': 0, 'i6': 1, 'i7': 0, 'i8': 2, 'i9': 1, 'i10': 1, 'i11': 1, 'i12': 0, 'i13': 1, 'i14': 1, 'i15': 2, 'i16': 1, 'i17': 1, 'i18': 0}])
+print(ram_automate.pos)
+
+#### Optimisation
 def graphe_ram(fichier):
     programme = []
     with open(fichier, 'r') as file: 
@@ -804,8 +965,6 @@ def combiner_instruction(fichier):
         f_out.write(programme[-1])
     print(programme)
 
-programme = read_program("machine_a_puissance_b.txt", [3, 15])
-
-ram = RAM(programme)
-code_mort_ram("fichier.txt")
+"""code_mort_ram("fichier.txt")
 combiner_instruction("machine_a_puissance_b.txt")
+"""
