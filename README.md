@@ -12,7 +12,7 @@ On a créé une classe RAM qui représente toutes les instructions d'une machine
 - MUL(i1, i2, i3) permet de multiplier le contenu de i1 et i2 et de stocker le résultat dans i3.
 - DIV(i1, i2, i3) permet de diviser le contenu de i1 et i2 et de stocker le résultat dans i3.
 - JE(i1, i2, z) permet de sauter z pas si la valeur de i1 est égale à la valeur de i2.
-- JL(i1, i2, z) permet de sauter z pas si la valeur de i1 est plus grande que la valeur de i2.
+- JL(i1, i2, z) permet de sauter z pas si la valeur de i1 est plus petite que la valeur de i2.
 - JUMP(z) permet de sauter z pas.
 - terminé permet de terminer le programme de la machine RAM.
 
@@ -32,7 +32,7 @@ La première est fichier.txt, qui est une machine RAM de test qui à chaque tour
 
 La deuxième machine est machine_a_puissance_b.txt, qui prend en argument un nombre a et un nombre b, et calcule a puissance b.
 
-La troisième machine est machine_tri_bulles.txt, qui prend en argument une liste de cinq chiffres et renvoie cette liste triée selon l'algorithme du tri à bulle. Nous avons choisi de programmer cette machine avec une liste de cinq chiffres, mais il est possible d'éteindre ou de restreindre la taille de la liste et de modifier la machine en conséquences.
+La troisième machine est machine_tri_bulles.txt, qui prend en argument une liste de cinq chiffres et renvoie cette liste triée selon l'algorithme du tri à bulle. Nous avons choisi de programmer cette machine avec une liste de cinq chiffres, mais il est possible d'éteindre ou de restreindre la taille de la liste en modifiant la machine en conséquences.
 
 ### 3 - Comment faire rentrer la pile dans la RAM ?
 

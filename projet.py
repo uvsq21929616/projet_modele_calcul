@@ -50,6 +50,7 @@ class RAM:
                 #print(result)
                 self.registre[registres[2]] = result
                 self.pos +=1
+                self.registre['i0'] = self.pos
                 #print(self.registre)
                 #self.order(self.instructions[self.pos])
             else:
@@ -58,6 +59,7 @@ class RAM:
                     #print(result)
                     self.registre[registres[2]] = result
                     self.pos +=1
+                    self.registre['i0'] = self.pos
                     #print(self.registre)
                     #self.order(self.instructions[self.pos])
                 else:
@@ -68,6 +70,7 @@ class RAM:
                     #print(result)
                     self.registre[registres[2]] = result
                     self.pos +=1
+                    self.registre['i0'] = self.pos
                     #print(self.registre)
         else:
             if str.isdigit(registres[1]):
@@ -76,6 +79,7 @@ class RAM:
                     #print(result)
                     self.registre[registres[2]] = result
                     self.pos +=1
+                    self.registre['i0'] = self.pos
                     #print(self.registre)
                     #self.order(self.instructions[self.pos])
                 else:
@@ -86,6 +90,7 @@ class RAM:
                     #print(result)
                     self.registre[registres[2]] = result
                     self.pos +=1
+                    self.registre['i0'] = self.pos
                     #print(self.registre)
 
             else:
@@ -95,6 +100,7 @@ class RAM:
                         #print(result)
                         self.registre[registres[2]] = result
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                         #print(self.registre)
                         #self.order(self.instructions[self.pos])
                     else:
@@ -106,11 +112,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         #print(self.registre)
-                        result = int(self.registre[registres[0]])+int(registres[1])
-                        #print(result)
-                        self.registre[registres[2]] = result
-                        self.pos +=1
-                        print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
 
                 else:
@@ -122,6 +124,7 @@ class RAM:
                         #print(result)
                         self.registre[registres[2]] = result
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                         #print(self.registre)
                         #self.order(self.instructions[self.pos])
                     else:
@@ -132,6 +135,7 @@ class RAM:
                         #print(result)
                         self.registre[registres[2]] = result
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
 
     def SUB(self, instruction):
@@ -149,6 +153,7 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
+                self.registre['i0'] = self.pos
                 #self.order(self.instructions[self.pos])
             else:
                 if '@' not in registres[1]:
@@ -157,6 +162,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[1].replace("@", "")
@@ -167,6 +173,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
 
         else:
             if str.isdigit(registres[1]):
@@ -186,6 +193,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
             else:
                 if "@" not in registres[0]:
                     if "@" not in registres[1]:
@@ -194,6 +202,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                     else:
                         registres[1].replace("@", "")
@@ -204,6 +213,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                 else:
                     if "@" not in registres[1]:
@@ -215,6 +225,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                     else:
                         registres[0].replace("@", "")
@@ -228,6 +239,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
 
     def MUL(self, instruction):
@@ -245,6 +257,7 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
+                self.registre['i0'] = self.pos
                 #self.order(self.instructions[self.pos])
             else:
                 if '@' not in registres[1]:
@@ -253,6 +266,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[1].replace("@", "")
@@ -263,6 +277,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
 
         else:
             if str.isdigit(registres[1]):
@@ -272,6 +287,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[0].replace("@", "")
@@ -282,6 +298,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
             else:
                 if "@" not in registres[0]:
                     if "@" not in registres[1]:
@@ -290,6 +307,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                     else:
                         registres[1].replace("@", "")
@@ -300,6 +318,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                 else:
                     if "@" not in registres[1]:
@@ -311,6 +330,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                     else:
                         registres[0].replace("@", "")
@@ -324,6 +344,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
 
     def DIV(self, instruction):
@@ -341,6 +362,7 @@ class RAM:
                 self.registre[registres[2]] = result
                 self.pos +=1
                 print(self.registre)
+                self.registre['i0'] = self.pos
                 #self.order(self.instructions[self.pos])
             else:
                 if '@' not in registres[1]:
@@ -349,6 +371,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[1].replace("@", "")
@@ -359,6 +382,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
 
         else:
             if str.isdigit(registres[1]):
@@ -368,6 +392,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[0].replace("@", "")
@@ -378,6 +403,7 @@ class RAM:
                     self.registre[registres[2]] = result
                     self.pos +=1
                     print(self.registre)
+                    self.registre['i0'] = self.pos
             else:
                 if "@" not in registres[0]:
                     if "@" not in registres[1]:
@@ -386,6 +412,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                     else:
                         registres[1].replace("@", "")
@@ -396,6 +423,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                 else:
                     if "@" not in registres[1]:
@@ -407,6 +435,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
                     else:
                         registres[0].replace("@", "")
@@ -420,6 +449,7 @@ class RAM:
                         self.registre[registres[2]] = result
                         self.pos +=1
                         print(self.registre)
+                        self.registre['i0'] = self.pos
                         #self.order(self.instructions[self.pos])
 
     def JUMP(self, instruction):
@@ -431,6 +461,7 @@ class RAM:
         registres = txt.split(",")
         print(registres)
         self.pos += int(registres[0])
+        self.registre['i0'] = self.pos
         #self.order(self.instructions[self.pos])
 
     def JE(self, instruction):
@@ -446,9 +477,11 @@ class RAM:
                 if self.registre[registres[0]] == int(registres[1]):
                     #print(int(registres[2]))
                     self.pos += int(registres[2])
+                    self.registre['i0'] = self.pos
                     #print(self.pos)
                 else:
                     self.pos +=1
+                    self.registre['i0'] = self.pos
                 #self.order(self.instructions[self.pos])
             else:
                 registres[0].replace("@", "")
@@ -457,9 +490,11 @@ class RAM:
                 if self.registre[clé] == int(registres[1]):
                     #print(int(registres[2]))
                     self.pos += int(registres[2])
+                    self.registre['i0'] = self.pos
                     #print(self.pos)
                 else:
                     self.pos +=1
+                    self.registre['i0'] = self.pos
                 #self.order(self.instructions[self.pos])
         else:
             if "@" not in registres[1]:
@@ -467,9 +502,11 @@ class RAM:
                     if self.registre[registres[0]] == self.registre[registres[1]]:
                         #print(int(registres[2]))
                         self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
                         #print(self.pos)
                     else:
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[0].replace("@", "")
@@ -478,9 +515,11 @@ class RAM:
                     if self.registre[clé] == self.registre[registres[1]]:
                         #print(int(registres[2]))
                         self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
                         #print(self.pos)
                     else:
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
             else:
                 registres[1].remplace("@", "")
@@ -490,9 +529,11 @@ class RAM:
                     if self.registre[registres[0]] == self.registre[clé2]:
                         #print(int(registres[2]))
                         self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
                         #print(self.pos)
                     else:
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
                 else:
                     registres[0].replace("@", "")
@@ -501,9 +542,11 @@ class RAM:
                     if self.registre[clé] == self.registre[clé2]:
                         #print(int(registres[2]))
                         self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
                         #print(self.pos)
                     else:
                         self.pos +=1
+                        self.registre['i0'] = self.pos
                     #self.order(self.instructions[self.pos])
 
     def JL(self, instruction):
@@ -514,30 +557,88 @@ class RAM:
         txt = txt[1:-1]
         registres = txt.split(",")
         print(registres)
-        if "@" not in registres[0]:
-            if self.registre[registres[0]] >= int(registres[1]):
-                print(int(registres[2]))
-                self.pos += int(registres[2])
-                print(self.pos)
+        if registres[1].isdigit():
+            if "@" not in registres[0]:
+                if self.registre[registres[0]] <= int(registres[1]):
+                    #print(int(registres[2]))
+                    self.pos += int(registres[2])
+                    self.registre['i0'] = self.pos
+                    #print(self.pos)
+                else:
+                    self.pos +=1
+                    self.registre['i0'] = self.pos
+                #self.order(self.instructions[self.pos])
             else:
-                self.pos +=1
+                registres[0].replace("@", "")
+                index = self.registre[registres[0]]
+                clé = list(self.registre.keys())[index]
+                if self.registre[clé] <= int(registres[1]):
+                    #print(int(registres[2]))
+                    self.pos += int(registres[2])
+                    self.registre['i0'] = self.pos
+                    #print(self.pos)
+                else:
+                    self.pos +=1
+                    self.registre['i0'] = self.pos
+                #self.order(self.instructions[self.pos])
         else:
-            registres[0].replace("@", "")
-            index = self.registre[registres[0]]
-            clé = list(self.registre.keys())[index]
-            if self.registre[clé] >= int(registres[1]):
-                print(int(registres[2]))
-                self.pos += int(registres[2])
-                print(self.pos)
+            if "@" not in registres[1]:
+                if "@" not in registres[0]:
+                    if self.registre[registres[0]] <= self.registre[registres[1]]:
+                        #print(int(registres[2]))
+                        self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
+                        #print(self.pos)
+                    else:
+                        self.pos +=1
+                        self.registre['i0'] = self.pos
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[0]]
+                    clé = list(self.registre.keys())[index]
+                    if self.registre[clé] <= self.registre[registres[1]]:
+                        #print(int(registres[2]))
+                        self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
+                        #print(self.pos)
+                    else:
+                        self.pos +=1
+                        self.registre['i0'] = self.pos
+                    #self.order(self.instructions[self.pos])
             else:
-                self.pos +=1
-
-        #self.order(self.instructions[self.pos])
+                registres[1].remplace("@", "")
+                index2 = self.registre[registres[1]]
+                clé2 = list(self.registre.keys())[index]
+                if "@" not in registres[0]:
+                    if self.registre[registres[0]] <= self.registre[clé2]:
+                        #print(int(registres[2]))
+                        self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
+                        #print(self.pos)
+                    else:
+                        self.pos +=1
+                        self.registre['i0'] = self.pos
+                    #self.order(self.instructions[self.pos])
+                else:
+                    registres[0].replace("@", "")
+                    index = self.registre[registres[0]]
+                    clé = list(self.registre.keys())[index]
+                    if self.registre[clé] <= self.registre[clé2]:
+                        #print(int(registres[2]))
+                        self.pos += int(registres[2])
+                        self.registre['i0'] = self.pos
+                        #print(self.pos)
+                    else:
+                        self.pos +=1
+                        self.registre['i0'] = self.pos
+                    #self.order(self.instructions[self.pos])
 
     def termine(self, instruction):
         print(instruction)
         print(self.pos, self.registre)
         self.pos += 1
+        self.registre['i0'] = self.pos
         return self.registre
 
 
@@ -684,19 +785,19 @@ def marche_ram(ram, mot):
         print("registre mis à jour:", ram.registre)
         print("position mise à jour:", ram.pos)
 
-def tri_a_bulle(tableau):
-    programme = read_program("machine_tri_bulles.txt", tableau)
-    ram = RAM(programme)
-    #marche_ram(ram, tableau)
-    print(ram.pos)
 
-programme = read_program("machine_a_puissance_b.txt", [3, 15])
+"""programme = read_program("machine_a_puissance_b.txt", [2, 5])
 ram = RAM(programme)
-marche_ram(ram, 3)
+marche_ram(ram, 2)"""
 
 tableau = [5, 3, 1, 4, 2]
-tri_a_bulle(tableau)
-print("Tableau trié :", tableau)
+programme = read_program("machine_tri_bulles.txt", tableau)
+ram = RAM(programme)
+marche_ram(ram, 5)
+tableau_trié = []
+for elem in list(ram.registre.keys())[1:6]:
+    tableau_trié.append(ram.registre[elem])
+print("Tableau trié :", tableau_trié)
 
 ### Automates à piles
 def lire_automate(liste_transition, mot, fichier):
@@ -845,15 +946,10 @@ def combiner_instruction(fichier):
                     txt2 = txt2.split(",")
                     print(txt2)
                     if txt1[2] == txt2[2]:
-                        print("okk")
                         if txt2[0].isdigit():
                             programme.remove(programme[i])
-                            print("hey")
-
                         elif txt2[0] != txt2[2]:
-                            print("uhoh")
-                            print("hey")
-
+                            pass
                         else:
                             if txt1[0].isdigit():
                                 result = int(txt1[0]) + int(txt1[1]) +int(txt2[1])
@@ -862,7 +958,6 @@ def combiner_instruction(fichier):
                                 print(txt)
                                 programme[i] = txt
                                 del(programme[i+1])
-                                print("hey")
                             else:
                                 result = int(txt1[1]) + int(txt2[1])
                                 print(result)
@@ -870,7 +965,6 @@ def combiner_instruction(fichier):
                                 print(txt)
                                 programme[i] = [txt]
                                 del(programme[i+1])
-                                print("hey")
 
                 if "SUB" in programme[i] and "SUB" in successeurs[programme[i]][0]:
                     txt1 = programme[i]
@@ -884,11 +978,10 @@ def combiner_instruction(fichier):
                     txt2 = txt2.split(",")
                     print(txt2)
                     if txt1[2] == txt2[2]:
-                        print("okk")
                         if txt2[0].isdigit():
                             programme.remove(programme[i])
                         elif txt2[0] != txt2[2]:
-                            print("uhoh")
+                            pass
                         else:
                             if txt1[0].isdigit():
                                 result = int(txt1[0]) - int(txt1[1]) - int(txt2[1])
@@ -916,11 +1009,10 @@ def combiner_instruction(fichier):
                     txt2 = txt2.split(",")
                     print(txt2)
                     if txt1[2] == txt2[2]:
-                        print("okk")
                         if txt2[0].isdigit():
                             programme.remove(programme[i])
                         elif txt2[0] != txt2[2]:
-                            print("uhoh")
+                            pass
                         else:
                             if txt1[0].isdigit():
                                 result = int(txt1[0]) * int(txt1[1]) * int(txt2[1])
@@ -948,11 +1040,10 @@ def combiner_instruction(fichier):
                     txt2 = txt2.split(",")
                     print(txt2)
                     if txt1[2] == txt2[2]:
-                        print("okk")
                         if txt2[0].isdigit():
                             programme.remove(programme[i])
                         elif txt2[0] != txt2[2]:
-                            print("uhoh")
+                            pass
                         else:
                             if txt1[0].isdigit():
                                 result = int(txt1[0]) * int(txt1[1]) * int(txt2[1])
@@ -974,5 +1065,6 @@ def combiner_instruction(fichier):
         f_out.write(programme[-1])
     print(programme)
 
-code_mort_ram("fichier.txt")
+"""code_mort_ram("fichier.txt")
 combiner_instruction("machine_a_puissance_b.txt")
+"""
