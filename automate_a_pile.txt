@@ -1,7 +1,7 @@
 FINDSTATE(i1,i2,i3)
-ADD(i2,i4, )
+ADD(i2,i4,i4)
 JE(i1,'',2)
 JUMP(-3)
-JE(i3,0,2)
+JE(i3,1,2)
 nonreconnu
 motreconnu

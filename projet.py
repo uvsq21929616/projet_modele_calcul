@@ -610,7 +610,8 @@ class RAM_AUTOMATE(RAM):
                 self.registre['i2'] += '1'
             elif lettre == '2':
                 self.registre['i2'] = self.registre['i2'][:-1]
-        self.registre['i3'] == self.registre['i4']
+        self.registre['i3'] = self.registre['i5']
+        self.registre['i1'] = self.registre['i1'][1:]
 
     def JE(self, instruction):
         print(instruction)
@@ -683,11 +684,19 @@ def marche_ram(ram, mot):
         print("registre mis à jour:", ram.registre)
         print("position mise à jour:", ram.pos)
 
-
+def tri_a_bulle(tableau):
+    programme = read_program("machine_tri_bulles.txt", tableau)
+    ram = RAM(programme)
+    #marche_ram(ram, tableau)
+    print(ram.pos)
 
 programme = read_program("machine_a_puissance_b.txt", [3, 15])
 ram = RAM(programme)
 marche_ram(ram, 3)
+
+tableau = [5, 3, 1, 4, 2]
+tri_a_bulle(tableau)
+print("Tableau trié :", tableau)
 
 ### Automates à piles
 def lire_automate(liste_transition, mot, fichier):
@@ -738,7 +747,7 @@ def marche_automate(ram):
 
 #print(lire_automate([[0, 1, 0, 2, 1, 1, 1], [0, 1, 1, 2, 1, 1, 0]], 0, "automate_a_pile.txt"))
 
-"""programme_automate = lire_automate([[0, 1, 0, 1, 0], [0, 1, 1, 1, 0], [0, 0, 1, 2, 1], [1, 0, 1, 2, 1], [1, '', 0, 0, 'final']], 111000, "automate_a_pile.txt")
+"""programme_automate = lire_automate([[0, 1, 0, 1, 0], [0, 1, 1, 1, 0], [0, 0, 1, 2, 2], [2, 0, 1, 2, 2], [2, '', 0, 0, 1]], 111000, "automate_a_pile.txt")
 ram_automate = RAM_AUTOMATE(programme_automate)
 print(ram_automate.instructions)
 print(ram_automate.registre)
