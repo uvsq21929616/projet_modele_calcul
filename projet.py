@@ -974,6 +974,5 @@ def combiner_instruction(fichier):
         f_out.write(programme[-1])
     print(programme)
 
-"""code_mort_ram("fichier.txt")
+code_mort_ram("fichier.txt")
 combiner_instruction("machine_a_puissance_b.txt")
-"""

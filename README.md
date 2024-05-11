@@ -80,4 +80,18 @@ On a pris l'automate à pile reconnaissant si un mot est égal à 1^n0^n. Cet au
 
 On a ensuite voulu optimiser le code des machines ram en supprimant le code mort, ie le code qui n'est jamais accessible.
 
-Pour cela, on a commencé par 
+Pour cela, on a commencé par programmer une fonction graphe_ram(fichier) qui prend en argument le fichier contenant le programme de la machine ram et renvoie le graphe orienté de cette machine sous forme de dictionnaire: chaque clé représente une instruction et la valeur associée représente sa liste d'enfants possibles, c'est-à-dire toutes les instructions disponibles à partir de cette instruction.
+
+Cette fonction permet de retrouver le code mort: si une instruction autre que la première instruction n'est la descendante d'aucune autre insruction, alors elle n'est jamais utilisée et est donc inutile. La seule exception à cette règle est la première instruction, qui peut n'avoir aucun ascendant mais n'est pas pour autant du code mort.
+
+La fonction graphe_fichier est ensuite utilisée par la fonction code_mort_ram(fichier), qui supprime le code mort d'une machine ram donnée en entrée et réécrit le programme nettoyé dans un fichier code_nettoyé.txt.
+
+La fonction graphe_fichier est aussi utilisée par la fonction combiner_instruction(fichier) qui permet de combiner les instructions redondantes d'une machine ram donnée en entrée et réécrit le programme nettoyé dans un fichier code_combiné.txt.
+
+### 6 - Utilisation
+
+Ce dossier contient un makefile.
+
+Il suffit donc pour l'utiliser de taper make dans le terminal.
+
+L'option make clean permet de supprimer les fichiers code_nettoyé.txt et code_combiné.txt.
